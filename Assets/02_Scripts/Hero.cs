@@ -8,26 +8,27 @@ public class Hero : MonoBehaviour
     [SerializeField] private TextMeshProUGUI tier;
     [SerializeField] private LayerMask targetLayer;
 
-    private HeroInfo currentData;
+    public HeroInfo CurrentData { get; private set; }
     private float attackTimer;
     private Transform currentTarget;
 
     private void Awake()
     {
-        currentData = heroData.heroInfos[0];
-        tier.text = currentData.tier.ToString();
+        CurrentData = heroData.heroInfos[0];
+        if (tier != null)
+            tier.text = CurrentData.tier.ToString();
     }
 
     private void Update()
     {
         attackTimer += Time.deltaTime;
 
-        if (currentTarget == null || Vector3.Distance(transform.position, currentTarget.position) > currentData.range)
+        if (currentTarget == null || Vector3.Distance(transform.position, currentTarget.position) > CurrentData.range)
         {
             currentTarget = ScanTarget();
         }
 
-        if (currentTarget != null && attackTimer >= 1f / currentData.attackRate)
+        if (currentTarget != null && attackTimer >= 1f / CurrentData.attackRate)
         {
             Attack();
             attackTimer = 0f;
@@ -36,10 +37,10 @@ public class Hero : MonoBehaviour
 
     private Transform ScanTarget()
     {
-        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, currentData.range, targetLayer);
+        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, CurrentData.range, targetLayer);
 
         Transform nearestEnemy = null;
-        float minDistance = currentData.range;
+        float minDistance = CurrentData.range;
 
         foreach (var col in targets)
         {
@@ -61,15 +62,15 @@ public class Hero : MonoBehaviour
         GameObject obj = Instantiate(heroData.projectilePrefab, firePoint.position, Quaternion.identity);
         if (obj.TryGetComponent(out Projectile projectile))
         {
-            projectile.Init(currentTarget, currentData.damage);
+            projectile.Init(currentTarget, CurrentData.atk);
         }
     }
 
     private void OnDrawGizmosSelected()
     {
-        if (currentData == null) return;
+        if (CurrentData == null) return;
 
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, currentData.range);
+        Gizmos.DrawWireSphere(transform.position, CurrentData.range);
     }
 }

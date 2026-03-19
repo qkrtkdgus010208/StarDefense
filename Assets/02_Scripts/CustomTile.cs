@@ -9,5 +9,4 @@ public class CustomTile : Tile
     public bool isBuff; // 이 타일이 버프 타일인지 여부
     public string uiName; // UI에 표시할 타일 이름
     public int cost; // 비용
-    public bool isOccupied; // 타일이 현재 점유되어 있는지 여부
 }

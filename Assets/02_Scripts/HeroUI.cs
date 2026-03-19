@@ -1,0 +1,40 @@
+﻿using TMPro;
+using UnityEngine;
+
+public class HeroUI : MonoBehaviour
+{
+    [SerializeField] private GameObject popupRoot; // UI 부모 오브젝트
+    [SerializeField] private TextMeshProUGUI tierText;
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI descText;
+    [SerializeField] private TextMeshProUGUI rangeText;
+    [SerializeField] private TextMeshProUGUI attackRateText;
+    [SerializeField] private TextMeshProUGUI damageText;
+
+    private TileManager tileManager;
+    private HeroInfo heroInfo;
+
+    public void Init(TileManager tileManager)
+    {
+        this.tileManager = tileManager;
+        Hide();
+    }
+
+    public void Show(Hero hero)
+    {
+        heroInfo = hero.CurrentData;
+
+        tierText.text = heroInfo.tier.ToString();
+        nameText.text = heroInfo.name;
+        descText.text = heroInfo.description;
+        rangeText.text = heroInfo.range.ToString();
+        attackRateText.text = heroInfo.attackRate.ToString();
+
+        popupRoot.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        popupRoot.SetActive(false);
+    }
+}

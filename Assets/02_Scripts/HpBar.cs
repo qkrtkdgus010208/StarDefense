@@ -8,9 +8,11 @@ public class HpBar : MonoBehaviour
     [SerializeField] private Status status;
     [SerializeField] private Image Gage;
 
+    [SerializeField] float waitTime = 3f;
+    [SerializeField] bool alwaysEnable = false;
+
     private Coroutine coroutine;
     private WaitForSeconds wait;
-    private float waitTime = 3f;
 
     private void Awake()
     {
@@ -25,6 +27,8 @@ public class HpBar : MonoBehaviour
 
     private void OnEnable()
     {
+        if (alwaysEnable) return;
+
         HideHpBar();
     }
 
@@ -47,7 +51,8 @@ public class HpBar : MonoBehaviour
     {
         hpBar.SetActive(true);
         yield return wait;
-        hpBar.SetActive(false);
+        if (!alwaysEnable)
+            hpBar.SetActive(false);
     }
 
     private void HideHpBar()
