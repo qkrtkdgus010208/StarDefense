@@ -332,6 +332,7 @@ GameObject:
   - component: {fileID: 9142978252638172594}
   - component: {fileID: -406957989017767994}
   - component: {fileID: 1863895537661823456}
+  - component: {fileID: 2072541436777228105}
   m_Layer: 7
   m_Name: Hero02
   m_TagString: Untagged
@@ -418,3 +419,15 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &2072541436777228105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7417651128765128131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee74c5d016c4f8f4598954484b16e035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

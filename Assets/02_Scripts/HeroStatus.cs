@@ -1,8 +1,8 @@
 ﻿
 public class HeroStatus : Status
 {
-    private Hero hero;
-    private HeroInfo heroData;
+    protected Hero hero;
+    protected HeroInfo heroData;
 
     protected override void SetUp()
     {

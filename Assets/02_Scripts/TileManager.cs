@@ -8,9 +8,12 @@ public class TileManager : MonoBehaviour
     [SerializeField] private TileUI tileUI;
     [SerializeField] private HeroUI heroUI;
     [SerializeField] private LayerMask heroLayer;
+    [SerializeField] private PlayerStatus playerStatus;
 
     private GameManager gameManager;
     private HeroManager heroManager;
+
+    private CustomTile currentCustomTile;
 
     private Camera mainCamara;
 
@@ -57,8 +60,8 @@ public class TileManager : MonoBehaviour
 
     private void CheckTile(Tilemap map, Vector3Int pos)
     {
-        CustomTile tile = map.GetTile<CustomTile>(pos);
-        if (tile == null)
+        currentCustomTile = map.GetTile<CustomTile>(pos);
+        if (currentCustomTile == null)
         {
             tileUI.Hide();
             heroUI.Hide();
@@ -67,7 +70,7 @@ public class TileManager : MonoBehaviour
 
         Vector3 centerWorldPos = map.GetCellCenterWorld(pos);
 
-        tileUI.Show(tile, map, pos, centerWorldPos);
+        tileUI.Show(currentCustomTile, map, pos, centerWorldPos);
     }
 
     private void CheckHero(Hero hero)
@@ -77,15 +80,22 @@ public class TileManager : MonoBehaviour
 
     public void RepairTile(Tilemap map, Vector3Int pos)
     {
+        if (!playerStatus.UseGold(currentCustomTile.cost)) return;
+
         map.SetTile(pos, normalTile);
+        currentCustomTile = null;
     }
 
     public void SpawnHero(Tilemap map, Vector3Int pos)
     {
+        if (!playerStatus.UseGold(currentCustomTile.cost)) return;
+
         Vector3 centerWorldPos = map.GetCellCenterWorld(pos);
 
         if (Physics2D.OverlapPoint(centerWorldPos, heroLayer) != null) return;
 
         heroManager.SpawnHero(map, pos);
+
+        currentCustomTile = null;
     }
 }

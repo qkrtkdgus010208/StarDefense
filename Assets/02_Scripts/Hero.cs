@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class Hero : MonoBehaviour
+public class Hero : Entity
 {
     [SerializeField] private HeroData heroData;
     [SerializeField] private Transform firePoint;
@@ -17,6 +17,11 @@ public class Hero : MonoBehaviour
         CurrentData = heroData.heroInfos[0];
         if (tier != null)
             tier.text = CurrentData.tier.ToString();
+    }
+
+    private void Start()
+    {
+        Init();
     }
 
     private void Update()

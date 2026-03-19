@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3444823971455020995}
   - component: {fileID: 2410663653127047890}
   - component: {fileID: 2435914202661164354}
-  - component: {fileID: 3650788038704773949}
+  - component: {fileID: 625555859648495131}
   - component: {fileID: 3817173375965825454}
   m_Layer: 7
   m_Name: Hero_Main
@@ -99,7 +99,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &3650788038704773949
+--- !u!114 &625555859648495131
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,9 +108,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3008573090336136875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee74c5d016c4f8f4598954484b16e035, type: 3}
+  m_Script: {fileID: 11500000, guid: fc9165dcc9b0cee468460dc10f7e8cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gold: 0
+  gem: 0
+  maxShip: 0
+  currentShip: 0
 --- !u!114 &3817173375965825454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 6116639275736370725}
-  status: {fileID: 3650788038704773949}
+  status: {fileID: 0}
   Gage: {fileID: 8411733411745743208}
   waitTime: 3
   alwaysEnable: 1

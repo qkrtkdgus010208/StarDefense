@@ -22,4 +22,8 @@ MonoBehaviour:
     def: 0
     range: 3
     attackRate: 0.5
+    startGold: 1500
+    gem: 0
+    maxShip: 20
+    currentShip: 0
   projectilePrefab: {fileID: 3467538125754510808, guid: 4822277348f6b50449829a5313439367, type: 3}
