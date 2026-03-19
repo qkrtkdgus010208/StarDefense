@@ -5,10 +5,16 @@ public class TileManager : MonoBehaviour
 {
     [SerializeField] private TileBase normalTile;
     [SerializeField] private TileBase fixTile;
+    
+    [SerializeField] private LayerMask heroLayer;
+    [SerializeField] private LayerMask tileLayer;
+
+    [SerializeField] private PlayerStatus playerStatus;
+
     [SerializeField] private TileUI tileUI;
     [SerializeField] private HeroUI heroUI;
-    [SerializeField] private LayerMask heroLayer;
-    [SerializeField] private PlayerStatus playerStatus;
+    [SerializeField] private MergeUI mergeUI;
+    [SerializeField] private BeyoundUI beyondUI;
 
     private GameManager gameManager;
     private HeroManager heroManager;
@@ -24,6 +30,8 @@ public class TileManager : MonoBehaviour
         mainCamara = Camera.main;
         tileUI.Init(this);
         heroUI.Init(this);
+        mergeUI.Init(this, heroManager);
+        beyondUI.Init(this, heroManager);
     }
 
     private void Update()
@@ -34,26 +42,40 @@ public class TileManager : MonoBehaviour
             mousePos.z = -mainCamara.transform.position.z;
             Vector3 worldPos = mainCamara.ScreenToWorldPoint(mousePos);
 
-            if (Physics2D.Raycast(worldPos, Vector2.zero) is RaycastHit2D hit && hit.collider != null)
+            RaycastHit2D[] hits = Physics2D.RaycastAll(worldPos, Vector2.zero);
+
+            if (hits.Length > 0)
             {
-                if (hit.collider.TryGetComponent(out Hero hero))
+                Hero foundHero = null;
+                Tilemap foundMap = null;
+
+                foreach (var hit in hits)
                 {
-                    CheckHero(hero);
+                    if (hit.collider.TryGetComponent(out Hero hero))
+                    {
+                        foundHero = hero;
+                    }
+                    else if (hit.collider.TryGetComponent(out Tilemap map))
+                    {
+                        foundMap = map;
+                    }
+                }
+
+                if (foundHero != null)
+                {
+                    CheckHero(foundHero);
                     return;
                 }
 
-                if (hit.collider.TryGetComponent(out Tilemap map))
+                if (foundMap != null)
                 {
-                    Vector3Int cellPos = map.WorldToCell(worldPos);
-                    CheckTile(map, cellPos);
-                    return;
+                    Vector3Int cellPos = foundMap.WorldToCell(worldPos);
+                    CheckTile(foundMap, cellPos);
                 }
-
             }
             else
             {
-                tileUI.Hide();
-                heroUI.Hide();
+                AllHide();
             }
         }
     }
@@ -63,19 +85,33 @@ public class TileManager : MonoBehaviour
         currentCustomTile = map.GetTile<CustomTile>(pos);
         if (currentCustomTile == null)
         {
-            tileUI.Hide();
-            heroUI.Hide();
+            AllHide();
             return;
         }
 
         Vector3 centerWorldPos = map.GetCellCenterWorld(pos);
 
+        AllHide();
         tileUI.Show(currentCustomTile, map, pos, centerWorldPos);
     }
 
     private void CheckHero(Hero hero)
     {
-        heroUI.Show(hero);
+        AllHide();
+
+        if (hero.IsMaxTier)
+        {
+            beyondUI.Show(hero);
+            heroUI.Show(hero);
+            return;
+        }
+
+        if (heroManager.MergeCheck(hero))
+        {
+            mergeUI.Show(hero);
+            heroUI.Show(hero);
+            return;
+        }
     }
 
     public void RepairTile(Tilemap map, Vector3Int pos)
@@ -97,5 +133,13 @@ public class TileManager : MonoBehaviour
         heroManager.SpawnHero(map, pos);
 
         currentCustomTile = null;
+    }
+
+    private void AllHide()
+    {
+        tileUI.Hide();
+        heroUI.Hide();
+        mergeUI.Hide();
+        beyondUI.Hide();
     }
 }

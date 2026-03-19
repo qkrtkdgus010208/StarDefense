@@ -4,17 +4,21 @@ using UnityEngine;
 public class Hero : Entity
 {
     [SerializeField] private HeroData heroData;
+    [SerializeField] private HeroStatus status;
     [SerializeField] private Transform firePoint;
     [SerializeField] private TextMeshProUGUI tier;
     [SerializeField] private LayerMask targetLayer;
 
     public HeroInfo CurrentData { get; private set; }
+    private int currentIndex = 0;
     private float attackTimer;
     private Transform currentTarget;
 
+    public bool IsMaxTier => currentIndex + 1 >= heroData.heroInfos.Length;
+
     private void Awake()
     {
-        CurrentData = heroData.heroInfos[0];
+        CurrentData = heroData.heroInfos[currentIndex];
         if (tier != null)
             tier.text = CurrentData.tier.ToString();
     }
@@ -69,6 +73,25 @@ public class Hero : Entity
         {
             projectile.Init(currentTarget, CurrentData.atk);
         }
+    }
+
+    public void Merge()
+    {
+        if (IsMaxTier)
+        {
+            // TODO: 초월 시스템 구현해야됨
+            Debug.Log($"최종 등급입니다!");
+            return;
+        }
+
+        currentIndex++;
+        HeroInfo nextInfo = heroData.heroInfos[currentIndex];
+        CurrentData = nextInfo;
+
+        if (tier != null)
+            tier.text = CurrentData.tier.ToString();
+
+        status.UpdateStat();
     }
 
     private void OnDrawGizmosSelected()

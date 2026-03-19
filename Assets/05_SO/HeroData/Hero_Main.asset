@@ -14,15 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroPrefab: {fileID: 6388644962932471224, guid: 4e53a814d9d3baa4b98ad7c2da35e1b4, type: 3}
   heroInfos:
-  - tier: 0
+  - id: 0
+    tier: 0
     name: Hero_Main
     description: "\uC9C0\uD718\uAD00"
+    beyondCost: 100
     hp: 1000
     atk: 20
     def: 0
     range: 3
     attackRate: 0.5
-    startGold: 1500
+    startGold: 15000
+    gem: 0
+    maxShip: 20
+    currentShip: 0
+  - id: 0
+    tier: 0
+    name: Hero_Main
+    description: "\uC9C0\uD718\uAD00"
+    beyondCost: 100
+    hp: 1000
+    atk: 20
+    def: 0
+    range: 3
+    attackRate: 0.5
+    startGold: 15000
     gem: 0
     maxShip: 20
     currentShip: 0

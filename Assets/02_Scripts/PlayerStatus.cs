@@ -16,10 +16,10 @@ public class PlayerStatus : HeroStatus
     {
         base.SetUp();
 
-        gold = heroData.startGold;
-        gem = heroData.gem;
-        maxShip = heroData.maxShip;
-        currentShip = heroData.currentShip;
+        gold = heroInfo.startGold;
+        gem = heroInfo.gem;
+        maxShip = heroInfo.maxShip;
+        currentShip = heroInfo.currentShip;
 
         OnGoldChanged?.Invoke(gold);
         OnGemChanged?.Invoke(gem);

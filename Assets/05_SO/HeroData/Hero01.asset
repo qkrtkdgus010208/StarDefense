@@ -14,28 +14,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroPrefab: {fileID: 6388644962932471224, guid: 4e53a814d9d3baa4b98ad7c2da35e1b4, type: 3}
   heroInfos:
-  - tier: 1
+  - id: 0
+    tier: 1
     name: Hero01
     description: "\uCCAB \uBC88\uC9F8 \uC601\uC6C5"
+    beyondCost: 10
     hp: 1000
     atk: 10
     def: 0
     range: 1.5
     attackRate: 1
-  - tier: 2
+    startGold: 150
+    gem: 0
+    maxShip: 20
+    currentShip: 0
+  - id: 0
+    tier: 2
     name: Hero01
     description: "\uCCAB \uBC88\uC9F8 \uC601\uC6C5"
+    beyondCost: 10
     hp: 1000
     atk: 15
     def: 0
     range: 1.5
     attackRate: 1
-  - tier: 3
+    startGold: 150
+    gem: 0
+    maxShip: 20
+    currentShip: 0
+  - id: 0
+    tier: 3
     name: Hero01
     description: "\uCCAB \uBC88\uC9F8 \uC601\uC6C5"
+    beyondCost: 10
     hp: 1000
     atk: 20
     def: 0
     range: 1.5
     attackRate: 1
+    startGold: 150
+    gem: 0
+    maxShip: 20
+    currentShip: 0
   projectilePrefab: {fileID: 3467538125754510808, guid: 4822277348f6b50449829a5313439367, type: 3}

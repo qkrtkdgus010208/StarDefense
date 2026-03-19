@@ -11,9 +11,11 @@ public class HeroData : ScriptableObject
 [System.Serializable]
 public class HeroInfo
 {
+    public int id;
     public int tier; // 1, 2, 3 등급
     public string name;
     public string description;
+    public int beyondCost;
     public float hp = 1000f;
     public float atk = 10f;
     public float def = 0f;
