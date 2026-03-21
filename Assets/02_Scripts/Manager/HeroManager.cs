@@ -62,7 +62,7 @@ public class HeroManager : MonoBehaviour
 
     private void DestroyCandidates()
     {
-        for (int i = 1; i < needMergeCount; i++)
+        for (int i = 0; i < needMergeCount - 1; i++)
         {
             Hero hero = destroyCandidates[i];
             destroyCandidates.Remove(hero);

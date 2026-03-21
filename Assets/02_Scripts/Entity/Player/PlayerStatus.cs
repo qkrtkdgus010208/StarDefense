@@ -67,7 +67,7 @@ public class PlayerStatus : HeroStatus
         if (gem >= value)
         {
             gem -= value;
-            OnGemChanged?.Invoke(gold);
+            OnGemChanged?.Invoke(gem);
             return true;
         }
 
