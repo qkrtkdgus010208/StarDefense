@@ -8,6 +8,7 @@ public class Hero : Entity
     [SerializeField] private Transform firePoint;
     [SerializeField] private TextMeshProUGUI tier;
     [SerializeField] private LayerMask targetLayer;
+    [SerializeField] private float upgradeMultiplier = 1f;
 
     public HeroInfo CurrentData { get; private set; }
     private int currentIndex = 0;
@@ -77,7 +78,8 @@ public class Hero : Entity
         GameObject obj = Instantiate(heroData.projectilePrefab, firePoint.position, Quaternion.identity);
         if (obj.TryGetComponent(out Projectile projectile))
         {
-            projectile.Init(currentTarget, CurrentData.atk);
+            float finalAtk = CurrentData.atk * upgradeMultiplier;
+            projectile.Init(currentTarget, finalAtk);
         }
     }
 
@@ -124,6 +126,12 @@ public class Hero : Entity
     {
         HasBuff = false;
         AdditionalAttackRate = 0f;
+    }
+
+    public void ApplyUpgrade()
+    {
+        upgradeMultiplier += 0.2f;
+        status.UpdateStat();
     }
 
     private void OnDrawGizmosSelected()

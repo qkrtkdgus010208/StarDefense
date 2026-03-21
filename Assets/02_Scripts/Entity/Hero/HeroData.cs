@@ -1,5 +1,14 @@
 ﻿using UnityEngine;
 
+public enum HeroGrade
+{
+    Normal,    // 노말
+    Rare,      // 레어
+    Epic,      // 에픽
+    Beyond,    // 초월
+    Commander  // 지휘관
+}
+
 [CreateAssetMenu(fileName = "HeroData", menuName = "ScriptableObjects/HeroData")]
 public class HeroData : ScriptableObject
 {
@@ -12,7 +21,8 @@ public class HeroData : ScriptableObject
 public class HeroInfo
 {
     public int id;
-    public int tier; // 1, 2, 3 등급
+    public int tier;
+    public HeroGrade grade;
     public bool canBeyond; // 초월 가능 여부
     public bool isBeyond; // 초월 상태 여부
     public string name;

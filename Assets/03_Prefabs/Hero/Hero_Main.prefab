@@ -94,11 +94,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heroData: {fileID: 11400000, guid: b5f81535081785446bafd93e0b32ff9f, type: 2}
+  status: {fileID: 625555859648495131}
   firePoint: {fileID: 3444823971455020995}
   tier: {fileID: 0}
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
+  upgradeMultiplier: 1
 --- !u!114 &625555859648495131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,9 +113,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc9165dcc9b0cee468460dc10f7e8cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gold: 0
+  gold: 150
   gem: 0
-  maxShip: 0
+  maxShip: 20
   currentShip: 0
 --- !u!114 &3817173375965825454
 MonoBehaviour:
@@ -128,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 6116639275736370725}
-  status: {fileID: 0}
+  status: {fileID: 625555859648495131}
   Gage: {fileID: 8411733411745743208}
   waitTime: 3
   alwaysEnable: 1

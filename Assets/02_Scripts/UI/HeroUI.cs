@@ -24,7 +24,7 @@ public class HeroUI : MonoBehaviour
     {
         heroInfo = hero.CurrentData;
 
-        tierText.text = heroInfo.tier.ToString();
+        tierText.text = heroInfo.grade.ToString();
         nameText.text = heroInfo.name;
         descText.text = heroInfo.description;
         rangeText.text = heroInfo.range.ToString();
@@ -41,6 +41,7 @@ public class HeroUI : MonoBehaviour
         else
         {
             attackRateText.text = finalAttackRate.ToString();
+            attackRateText.color = Color.white;
         }
 
         popupRoot.SetActive(true);

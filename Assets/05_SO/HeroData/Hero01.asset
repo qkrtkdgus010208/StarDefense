@@ -16,6 +16,7 @@ MonoBehaviour:
   heroInfos:
   - id: 0
     tier: 1
+    grade: 0
     canBeyond: 0
     isBeyond: 0
     name: Hero01
@@ -32,6 +33,7 @@ MonoBehaviour:
     currentShip: 0
   - id: 0
     tier: 2
+    grade: 1
     canBeyond: 0
     isBeyond: 0
     name: Hero01
@@ -48,6 +50,7 @@ MonoBehaviour:
     currentShip: 0
   - id: 0
     tier: 3
+    grade: 2
     canBeyond: 1
     isBeyond: 0
     name: Hero01
@@ -64,6 +67,7 @@ MonoBehaviour:
     currentShip: 0
   - id: 0
     tier: 4
+    grade: 3
     canBeyond: 0
     isBeyond: 1
     name: Hero01

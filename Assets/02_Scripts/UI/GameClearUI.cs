@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class GameClearUI : MonoBehaviour
 {
-    [SerializeField] Button retryButton;
+    [SerializeField] private Button retryButton;
 
     private void Start()
     {

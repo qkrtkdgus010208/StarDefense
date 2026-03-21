@@ -2,12 +2,13 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using static UnityEngine.GraphicsBuffer;
 
 public class HeroManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] heroPrefab;
     [SerializeField] private int needMergeCount;
+
+    [SerializeField] private Hero player;
 
     private GameManager gameManager;
 
@@ -15,7 +16,7 @@ public class HeroManager : MonoBehaviour
     private List<Hero> mergeCandidates;
     private List<Hero> destroyCandidates;
     private int targetId;
-    private int targetTier;
+    private HeroGrade targetTier;
 
     public void Init(GameManager gm)
     {
@@ -23,6 +24,8 @@ public class HeroManager : MonoBehaviour
         heroes = new List<Hero>();
         mergeCandidates = new List<Hero>();
         destroyCandidates = new List<Hero>();
+
+        heroes.Add(player);
     }
 
     public Hero SpawnHero(Tilemap map, Vector3Int pos)
@@ -39,10 +42,10 @@ public class HeroManager : MonoBehaviour
     public bool MergeCheck(Hero hero)
     {
         targetId = hero.CurrentData.id;
-        targetTier = hero.CurrentData.tier;
+        targetTier = hero.CurrentData.grade;
 
         mergeCandidates = heroes
-            .Where(h => h.CurrentData.id == targetId && h.CurrentData.tier == targetTier)
+            .Where(h => h.CurrentData.id == targetId && h.CurrentData.grade == targetTier)
             .ToList();
 
         return mergeCandidates.Count >= needMergeCount;
@@ -78,5 +81,15 @@ public class HeroManager : MonoBehaviour
     public void PerformBeyond(Hero hero)
     {
         hero.Beyond();
+    }
+
+    public void Upgrade(HeroGrade grade)
+    {
+        List<Hero> targetHeroes = heroes.Where(h => h.CurrentData.grade == grade).ToList();
+
+        foreach (var hero in targetHeroes)
+        {
+            hero.ApplyUpgrade();
+        }
     }
 }

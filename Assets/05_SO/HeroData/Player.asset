@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3a4d30bc737ed5469bbde15da47c86d, type: 3}
-  m_Name: Hero_Main
+  m_Name: Player
   m_EditorClassIdentifier: 
   heroPrefab: {fileID: 6388644962932471224, guid: 4e53a814d9d3baa4b98ad7c2da35e1b4, type: 3}
   heroInfos:
   - id: 0
     tier: 0
+    grade: 4
     canBeyond: 0
     isBeyond: 0
     name: Hero_Main
@@ -32,6 +33,7 @@ MonoBehaviour:
     currentShip: 0
   - id: 0
     tier: 0
+    grade: 4
     canBeyond: 0
     isBeyond: 0
     name: Hero_Main
