@@ -44,10 +44,7 @@ public abstract class Status : MonoBehaviour
 
         float deltaHp = afterHp - beforeHp;
 
-        if (deltaHp <= 0)
-            return;
-
-        //GameManager.Instance.CombatManager.HealPopUp(deltaHp);
+        if (deltaHp <= 0) return;
 
         OnHpChanged?.Invoke(CurrentHp, MaxHp);
     }

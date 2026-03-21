@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 
 public class PlayerStatus : HeroStatus
 {
@@ -24,6 +23,16 @@ public class PlayerStatus : HeroStatus
         OnGoldChanged?.Invoke(gold);
         OnGemChanged?.Invoke(gem);
         OnShipChanged?.Invoke(currentShip, maxShip);
+    }
+
+    private void Start()
+    {
+        OnDie += GameManager.Instance.GameOver;
+    }
+
+    private void OnDestroy()
+    {
+       OnDie -= GameManager.Instance.GameOver;
     }
 
     public void AddGold(int value)

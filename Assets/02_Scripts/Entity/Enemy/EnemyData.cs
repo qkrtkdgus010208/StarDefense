@@ -7,4 +7,5 @@ public class EnemyData : ScriptableObject
     public float moveSpeed = 1f;
     public float atk = 0f;
     public float def = 0f;
+    public int rewardGold = 10;
 }

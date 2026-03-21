@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private EnemyManager enemyManager;
     [SerializeField] private TileManager tileManager;
     [SerializeField] private HeroManager heroManager;
+
+    [SerializeField] private GameOverUI gameOverUI;
+
+    [field:SerializeField] public PlayerStatus PlayerStatus { get; private set; }
 
     private void Awake()
     {
@@ -27,5 +32,18 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         stageManager.Setup();
+    }
+
+    public void GameOver()
+    {
+        Time.timeScale = 0f;
+        gameOverUI.Show();
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.buildIndex);
     }
 }
