@@ -10,8 +10,10 @@ public class Hero : Entity
     [SerializeField] private LayerMask targetLayer;
 
     public HeroInfo CurrentData { get; private set; }
-    private float attackRate;
     private int currentIndex = 0;
+
+    public bool HasBuff { get; private set; }
+    public float AdditionalAttackRate { get; private set; }
 
     private float attackTimer;
     private Transform currentTarget;
@@ -22,7 +24,6 @@ public class Hero : Entity
     private void Awake()
     {
         CurrentData = heroData.heroInfos[currentIndex];
-        attackRate = CurrentData.attackRate;
 
         if (tier != null)
             tier.text = CurrentData.tier.ToString();
@@ -42,7 +43,7 @@ public class Hero : Entity
             currentTarget = ScanTarget();
         }
 
-        if (currentTarget != null && attackTimer >= 1f / attackRate)
+        if (currentTarget != null && attackTimer >= 1f / (CurrentData.attackRate + AdditionalAttackRate))
         {
             Attack();
             attackTimer = 0f;
@@ -113,7 +114,16 @@ public class Hero : Entity
 
     public void ApplyBuff()
     {
-        attackRate *= 2;
+        if (HasBuff) return;
+
+        HasBuff = true;
+        AdditionalAttackRate = CurrentData.attackRate;
+    }
+
+    public void RemoveBuff()
+    {
+        HasBuff = false;
+        AdditionalAttackRate = 0f;
     }
 
     private void OnDrawGizmosSelected()

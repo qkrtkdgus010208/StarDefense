@@ -28,7 +28,20 @@ public class HeroUI : MonoBehaviour
         nameText.text = heroInfo.name;
         descText.text = heroInfo.description;
         rangeText.text = heroInfo.range.ToString();
-        attackRateText.text = heroInfo.attackRate.ToString();
+
+        float finalAttackRate = heroInfo.attackRate;
+
+        if (hero.HasBuff)
+        {
+            finalAttackRate += hero.AdditionalAttackRate;
+
+            attackRateText.text = $"{finalAttackRate} (+{hero.AdditionalAttackRate})";
+            attackRateText.color = Color.green;
+        }
+        else
+        {
+            attackRateText.text = finalAttackRate.ToString();
+        }
 
         popupRoot.SetActive(true);
     }
