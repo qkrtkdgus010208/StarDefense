@@ -25,14 +25,15 @@ public class HeroManager : MonoBehaviour
         destroyCandidates = new List<Hero>();
     }
 
-    public void SpawnHero(Tilemap map, Vector3Int pos)
+    public Hero SpawnHero(Tilemap map, Vector3Int pos)
     {
-        if (heroPrefab.Length == 0) return;
+        if (heroPrefab.Length == 0) return null;
 
         int randomIndex = Random.Range(0, heroPrefab.Length);
         GameObject heroObj = Instantiate(heroPrefab[randomIndex], map.GetCellCenterWorld(pos), Quaternion.identity);
         Hero hero = heroObj.GetComponent<Hero>();
         heroes.Add(hero);
+        return hero;
     }
 
     public bool MergeCheck(Hero hero)

@@ -37,6 +37,12 @@ public class TileUI : MonoBehaviour
         {
             tileManager.RepairTile(currentMap, currentCellPos);
         }
+        else if (customTile.isBuff)
+        {
+            Hero hero = tileManager.SpawnHero(currentMap, currentCellPos);
+            if (hero != null)
+                hero.ApplyBuff();
+        }
         else
         {
             tileManager.SpawnHero(currentMap, currentCellPos);

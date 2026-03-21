@@ -128,17 +128,19 @@ public class TileManager : MonoBehaviour
         currentCustomTile = null;
     }
 
-    public void SpawnHero(Tilemap map, Vector3Int pos)
+    public Hero SpawnHero(Tilemap map, Vector3Int pos)
     {
-        if (!playerStatus.UseGold(currentCustomTile.cost)) return;
+        if (!playerStatus.UseGold(currentCustomTile.cost)) return null;
 
         Vector3 centerWorldPos = map.GetCellCenterWorld(pos);
 
-        if (Physics2D.OverlapPoint(centerWorldPos, heroLayer) != null) return;
+        if (Physics2D.OverlapPoint(centerWorldPos, heroLayer) != null) return null;
 
-        heroManager.SpawnHero(map, pos);
+        Hero hero = heroManager.SpawnHero(map, pos);
 
         currentCustomTile = null;
+
+        return hero;
     }
 
     private void AllHide()
