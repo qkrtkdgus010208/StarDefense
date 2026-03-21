@@ -10,13 +10,15 @@ public class BeyoundUI : MonoBehaviour
 
     private TileManager tileManager;
     private HeroManager heroManager;
-
+    private PlayerStatus playerStatus;
+    
     private Hero currentHero;
 
-    public void Init(TileManager tileManager, HeroManager heroManager)
+    public void Init(TileManager tileManager, HeroManager heroManager, PlayerStatus playerStatus)
     {
         this.tileManager = tileManager;
         this.heroManager = heroManager;
+        this.playerStatus = playerStatus;
         Hide();
     }
 
@@ -32,7 +34,9 @@ public class BeyoundUI : MonoBehaviour
 
     private void OnActionBeyoundButtonClicked()
     {
-        // TODO: heroManager.PerformBeyond(currentHero);
+        if (!playerStatus.UseGem(currentHero.CurrentData.beyondCost)) return;
+
+        heroManager.PerformBeyond(currentHero);
         Hide();
     }
 

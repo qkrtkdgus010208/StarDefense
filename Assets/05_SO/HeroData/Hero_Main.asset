@@ -16,6 +16,8 @@ MonoBehaviour:
   heroInfos:
   - id: 0
     tier: 0
+    canBeyond: 0
+    isBeyond: 0
     name: Hero_Main
     description: "\uC9C0\uD718\uAD00"
     beyondCost: 100
@@ -25,11 +27,13 @@ MonoBehaviour:
     range: 3
     attackRate: 0.5
     startGold: 15000
-    gem: 0
+    gem: 500
     maxShip: 20
     currentShip: 0
   - id: 0
     tier: 0
+    canBeyond: 0
+    isBeyond: 0
     name: Hero_Main
     description: "\uC9C0\uD718\uAD00"
     beyondCost: 100
@@ -39,7 +43,7 @@ MonoBehaviour:
     range: 3
     attackRate: 0.5
     startGold: 15000
-    gem: 0
+    gem: 500
     maxShip: 20
     currentShip: 0
   projectilePrefab: {fileID: 3467538125754510808, guid: 4822277348f6b50449829a5313439367, type: 3}

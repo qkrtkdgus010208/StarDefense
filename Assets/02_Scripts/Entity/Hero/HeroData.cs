@@ -13,6 +13,8 @@ public class HeroInfo
 {
     public int id;
     public int tier; // 1, 2, 3 등급
+    public bool canBeyond; // 초월 가능 여부
+    public bool isBeyond; // 초월 상태 여부
     public string name;
     public string description;
     public int beyondCost;

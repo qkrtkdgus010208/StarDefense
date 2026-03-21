@@ -16,6 +16,8 @@ MonoBehaviour:
   heroInfos:
   - id: 2
     tier: 1
+    canBeyond: 0
+    isBeyond: 0
     name: Hero03
     description: "\uC138 \uBC88\uC9F8 \uC601\uC6C5"
     beyondCost: 10
@@ -30,6 +32,8 @@ MonoBehaviour:
     currentShip: 0
   - id: 2
     tier: 2
+    canBeyond: 0
+    isBeyond: 0
     name: Hero03
     description: "\uC138 \uBC88\uC9F8 \uC601\uC6C5"
     beyondCost: 10
@@ -44,11 +48,29 @@ MonoBehaviour:
     currentShip: 0
   - id: 2
     tier: 3
+    canBeyond: 1
+    isBeyond: 0
     name: Hero03
     description: "\uC138 \uBC88\uC9F8 \uC601\uC6C5"
     beyondCost: 10
     hp: 1000
     atk: 20
+    def: 0
+    range: 1.5
+    attackRate: 1
+    startGold: 150
+    gem: 0
+    maxShip: 20
+    currentShip: 0
+  - id: 2
+    tier: 3
+    canBeyond: 0
+    isBeyond: 1
+    name: Hero03
+    description: "\uC138 \uBC88\uC9F8 \uC601\uC6C5(\uCD08\uC6D4)"
+    beyondCost: 10
+    hp: 1000
+    atk: 40
     def: 0
     range: 1.5
     attackRate: 1

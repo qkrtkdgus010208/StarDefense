@@ -31,7 +31,7 @@ public class TileManager : MonoBehaviour
         tileUI.Init(this);
         heroUI.Init(this);
         mergeUI.Init(this, heroManager);
-        beyondUI.Init(this, heroManager);
+        beyondUI.Init(this, heroManager, playerStatus);
     }
 
     private void Update()
@@ -98,6 +98,12 @@ public class TileManager : MonoBehaviour
     private void CheckHero(Hero hero)
     {
         AllHide();
+
+        if (hero.IsBeyond)
+        {
+            heroUI.Show(hero);
+            return;
+        }
 
         if (hero.IsMaxTier)
         {

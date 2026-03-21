@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Hero : Entity
 {
-    [SerializeField] private HeroData heroData;
+    [SerializeField] public HeroData heroData;
     [SerializeField] private HeroStatus status;
     [SerializeField] private Transform firePoint;
     [SerializeField] private TextMeshProUGUI tier;
@@ -14,7 +14,8 @@ public class Hero : Entity
     private float attackTimer;
     private Transform currentTarget;
 
-    public bool IsMaxTier => currentIndex + 1 >= heroData.heroInfos.Length;
+    public bool IsMaxTier => CurrentData.canBeyond;
+    public bool IsBeyond => CurrentData.isBeyond;
 
     private void Awake()
     {
@@ -77,21 +78,34 @@ public class Hero : Entity
 
     public void Merge()
     {
-        if (IsMaxTier)
-        {
-            // TODO: 초월 시스템 구현해야됨
-            Debug.Log($"최종 등급입니다!");
-            return;
-        }
-
-        currentIndex++;
-        HeroInfo nextInfo = heroData.heroInfos[currentIndex];
-        CurrentData = nextInfo;
+        if (IsMaxTier) return;
+        GetNextData();
 
         if (tier != null)
             tier.text = CurrentData.tier.ToString();
 
         status.UpdateStat();
+    }
+
+    private void GetNextData()
+    {
+        currentIndex++;
+        HeroInfo nextInfo = heroData.heroInfos[currentIndex];
+        CurrentData = nextInfo;
+    }
+
+    public void Beyond()
+    {
+        if (IsMaxTier)
+        {
+            GetNextData();
+
+            if (tier != null)
+                tier.text = "X";
+
+            status.UpdateStat();
+        }
+
     }
 
     private void OnDrawGizmosSelected()
