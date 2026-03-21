@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private HeroManager heroManager;
 
     [SerializeField] private GameOverUI gameOverUI;
+    [SerializeField] private GameClearUI gameClearUI;
 
     [field:SerializeField] public PlayerStatus PlayerStatus { get; private set; }
 
@@ -38,6 +39,12 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         gameOverUI.Show();
+    }
+
+    public void GameClear()
+    {
+        Time.timeScale = 0f;
+        gameClearUI.Show();
     }
 
     public void RestartGame()

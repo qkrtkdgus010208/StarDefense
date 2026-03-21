@@ -7,11 +7,16 @@ public class EnemyManager : MonoBehaviour
     private GameManager gameManager;
     private StageManager stageManager;
 
-    private StageData stageData;
+    [SerializeField] private WaveInfo currentWaveInfo;
     private Transform[] wayPoints;
 
     private Coroutine spawnCoroutine;
+    private Coroutine waitCoroutine;
     private List<Enemy> enemies;
+
+    private bool isSpawning;
+
+    public int EnemyCount => enemies.Count;
 
     public void Init(GameManager gm, StageManager sm)
     {
@@ -21,30 +26,75 @@ public class EnemyManager : MonoBehaviour
         enemies = new List<Enemy>();
     }
 
-    public void Setup(StageData stageData, Transform[] wayPoints)
+    public void Setup(WaveInfo waveInfo, Transform[] wayPoints)
     {
-        this.stageData = stageData;
+        currentWaveInfo = waveInfo;
         this.wayPoints = wayPoints;
 
+        ReStartCor();
+    }
+
+    public void SetupNext(WaveInfo waveInfo)
+    {
+        currentWaveInfo = waveInfo;
+        ReStartCor();
+    }
+
+    private void ReStartCor()
+    {
         if (spawnCoroutine != null)
             StopCoroutine(spawnCoroutine);
         spawnCoroutine = StartCoroutine(SpawnEnemies());
+
+        if (waitCoroutine != null)
+            StopCoroutine(waitCoroutine);
+        waitCoroutine = StartCoroutine(NextWaveStart());
     }
 
     private IEnumerator SpawnEnemies()
     {
-        foreach (var wave in stageData.waves)
-        {
-            for (int i = 0; i < wave.count; i++)
-            {
-                GameObject enemyObj = Instantiate(wave.enemyPrefab);
-                Enemy enemy = enemyObj.GetComponent<Enemy>();
-                enemy.Init(wayPoints, gameManager);
-                enemies.Add(enemy);
-                yield return new WaitForSeconds(wave.spawnInterval);
-            }
+        isSpawning = true;
 
-            yield return new WaitForSeconds(wave.waitAfterWave);
+        for (int i = 0; i < currentWaveInfo.count; i++)
+        {
+            GameObject enemyObj = Instantiate(currentWaveInfo.enemyPrefab);
+            Enemy enemy = enemyObj.GetComponent<Enemy>();
+            enemy.Init(wayPoints, gameManager, this);
+            enemies.Add(enemy);
+
+            if (i == currentWaveInfo.count)
+                isSpawning = false;
+
+            yield return new WaitForSeconds(currentWaveInfo.spawnInterval);
         }
+    }
+
+    private IEnumerator NextWaveStart()
+    {
+        yield return new WaitForSeconds(currentWaveInfo.waitAfterWave);
+        stageManager.NextWaveStart();
+    }
+
+    public void RemoveEnemy(Enemy enemy)
+    {
+        if (enemies.Contains(enemy))
+            enemies.Remove(enemy);
+
+        if (IsWaveClear())
+        {
+            stageManager.NextWaveStart();
+            IsStageClear();
+        }
+    }
+
+    private bool IsWaveClear()
+    {
+        return enemies.Count <= 0 && isSpawning;
+    }
+
+    private void IsStageClear()
+    {
+        if (stageManager.IsSpawnFinished)
+            gameManager.GameClear();
     }
 }
