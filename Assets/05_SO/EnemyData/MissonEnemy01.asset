@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6b21f511aebc5648a596c914c191a92, type: 3}
-  m_Name: Enemy02
+  m_Name: MissonEnemy01
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  enemyName: 
-  hp: 30
-  moveSpeed: 1
-  atk: 30
+  prefab: {fileID: 2527013652519644858, guid: 74b2018191890114d9427d8fc7adf421, type: 3}
+  enemyName: "\uC9C8\uD22C\uC758 \uACF5\uD5C8"
+  hp: 200
+  moveSpeed: 1.2
+  atk: 200
   def: 0
-  rewardGold: 15
+  rewardGold: 100

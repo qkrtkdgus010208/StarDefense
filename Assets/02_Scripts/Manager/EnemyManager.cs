@@ -69,6 +69,14 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    public void SpawnEnemy(EnemyData enemyData)
+    {
+        GameObject enemyObj = Instantiate(enemyData.prefab);
+        Enemy enemy = enemyObj.GetComponent<Enemy>();
+        enemy.Init(wayPoints, gameManager, this);
+        enemies.Add(enemy);
+    }
+
     private IEnumerator NextWaveStart()
     {
         yield return new WaitForSeconds(currentWaveInfo.waitAfterWave);

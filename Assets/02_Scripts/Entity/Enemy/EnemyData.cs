@@ -3,6 +3,8 @@
 [CreateAssetMenu(fileName = "EnemyData", menuName = "ScriptableObjects/EnemyData")]
 public class EnemyData : ScriptableObject
 {
+    public GameObject prefab;
+    public string enemyName;
     public float hp = 20;
     public float moveSpeed = 1f;
     public float atk = 0f;

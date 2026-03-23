@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShipUI : MonoBehaviour
+public class ExplorerShipUI : MonoBehaviour
 {
     [Header("Buttons")]
     [SerializeField] private Button summonBtn;

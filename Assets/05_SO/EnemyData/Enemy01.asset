@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6b21f511aebc5648a596c914c191a92, type: 3}
   m_Name: Enemy01
   m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  enemyName: 
   hp: 20
   moveSpeed: 1
-  atk: 200
+  atk: 20
   def: 0
   rewardGold: 10
