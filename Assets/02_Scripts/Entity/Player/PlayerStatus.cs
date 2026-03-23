@@ -1,7 +1,10 @@
 ﻿using System;
+using UnityEngine;
 
 public class PlayerStatus : HeroStatus
 {
+    [SerializeField] private ShipManager shipManager;
+
     public int gold;
     public int gem;
     public int maxShip;
@@ -61,7 +64,7 @@ public class PlayerStatus : HeroStatus
     public void AddGem(int value)
     {
         gem += value;
-        OnGemChanged?.Invoke(gold);
+        OnGemChanged?.Invoke(gem);
     }
 
     public bool UseGem(int value)
@@ -82,6 +85,7 @@ public class PlayerStatus : HeroStatus
         {
             gold -= value;
             currentShip++;
+            shipManager.CreateShip(this);
             OnShipChanged?.Invoke(currentShip, maxShip);
             OnGoldChanged?.Invoke(gold);
             return true;
