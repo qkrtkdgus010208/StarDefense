@@ -38,6 +38,8 @@ public class MissonUI : MonoBehaviour
     [SerializeField] private float cooldownTime = 60f;
 
     private Coroutine cooldownCor;
+    private float cooldownEndTime;
+    private bool isCooldownActive = false;
 
     private void Start()
     {
@@ -59,32 +61,58 @@ public class MissonUI : MonoBehaviour
         closeBtn.onClick.RemoveListener(CloseBtnClicked);
     }
 
+    private void OnEnable()
+    {
+        if (isCooldownActive)
+        {
+            if (Time.time >= cooldownEndTime)
+            {
+                EndCooldown();
+            }
+            else
+            {
+                if (cooldownCor != null) StopCoroutine(cooldownCor);
+                cooldownCor = StartCoroutine(CooldownRoutine());
+            }
+        }
+    }
+
     private void OnMissonClicked()
     {
-        if (cooldownCor != null)
-            StopCoroutine(cooldownCor);
+        cooldownEndTime = Time.time + cooldownTime;
+        isCooldownActive = true;
+
+        if (cooldownCor != null) StopCoroutine(cooldownCor);
         cooldownCor = StartCoroutine(CooldownRoutine());
     }
 
     private IEnumerator CooldownRoutine()
     {
         cooldownImg.gameObject.SetActive(true);
+        SetButtonsInteractable(false);
 
         float timer = cooldownTime;
 
-        while (timer > 0)
+        while (Time.time < cooldownEndTime)
         {
-            timer -= Time.deltaTime;
+            float remainingTime = cooldownEndTime - Time.time;
 
-            int minutes = Mathf.FloorToInt(timer / 60);
-            int seconds = Mathf.FloorToInt(timer % 60);
+            int minutes = Mathf.FloorToInt(remainingTime / 60);
+            int seconds = Mathf.FloorToInt(remainingTime % 60);
 
             cooldownText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
             yield return null;
         }
 
+        EndCooldown();
+    }
+
+    private void EndCooldown()
+    {
+        isCooldownActive = false;
         cooldownImg.gameObject.SetActive(false);
+        SetButtonsInteractable(true);
         cooldownCor = null;
     }
 
@@ -127,5 +155,12 @@ public class MissonUI : MonoBehaviour
     public void Show()
     {
         gameObject.SetActive(true);
+    }
+
+    private void SetButtonsInteractable(bool interactable)
+    {
+        misson01Btn.interactable = interactable;
+        misson02Btn.interactable = interactable;
+        misson03Btn.interactable = interactable;
     }
 }
