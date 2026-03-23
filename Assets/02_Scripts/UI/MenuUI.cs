@@ -7,6 +7,7 @@ public class MenuUI : MonoBehaviour
     [SerializeField] private Button shipButton;
     [SerializeField] private Button upgradeButton;
 
+    [SerializeField] ShipUI shipUI;
     [SerializeField] UpgradeUI upgradeUI;
 
     private void Start()
@@ -30,7 +31,7 @@ public class MenuUI : MonoBehaviour
 
     private void OnShipButtonClicked()
     {
-        Debug.Log("Ship Button Clicked");
+        shipUI.Show();
     }
 
     private void OnUpgradeButtonClicked()

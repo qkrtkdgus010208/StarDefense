@@ -40,7 +40,7 @@ public class UpgradeUI : MonoBehaviour
         rareUpgradeBtn.onClick.AddListener(OnrareUpgradeBtnClicked);
         epicUpgradeBtn.onClick.AddListener(OnepicUpgradeBtnClicked);
         playerUpgradeBtn.onClick.AddListener(OnplayerUpgradeBtnClicked);
-        closeBtn.onClick.AddListener(closeBtnClicked);
+        closeBtn.onClick.AddListener(CloseBtnClicked);
 
         UpdateView();
     }
@@ -51,7 +51,7 @@ public class UpgradeUI : MonoBehaviour
         rareUpgradeBtn.onClick.RemoveListener(OnrareUpgradeBtnClicked);
         epicUpgradeBtn.onClick.RemoveListener(OnepicUpgradeBtnClicked);
         playerUpgradeBtn.onClick.RemoveListener(OnplayerUpgradeBtnClicked);
-        closeBtn.onClick.RemoveListener(closeBtnClicked);
+        closeBtn.onClick.RemoveListener(CloseBtnClicked);
     }
 
     private void UpdateView()
@@ -107,7 +107,7 @@ public class UpgradeUI : MonoBehaviour
         }
     }
 
-    private void closeBtnClicked()
+    private void CloseBtnClicked()
     {
         gameObject.SetActive(false);
     }

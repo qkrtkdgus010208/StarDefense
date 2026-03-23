@@ -19,6 +19,8 @@ public class PlayerStatus : HeroStatus
         gem = heroInfo.gem;
         maxShip = heroInfo.maxShip;
         currentShip = heroInfo.currentShip;
+
+        ReBuild();
     }
 
     public void ReBuild()
@@ -81,6 +83,7 @@ public class PlayerStatus : HeroStatus
             gold -= value;
             currentShip++;
             OnShipChanged?.Invoke(currentShip, maxShip);
+            OnGoldChanged?.Invoke(gold);
             return true;
         }
 

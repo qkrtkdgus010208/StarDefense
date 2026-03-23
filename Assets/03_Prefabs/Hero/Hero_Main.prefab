@@ -113,9 +113,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc9165dcc9b0cee468460dc10f7e8cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gold: 150
+  gold: 0
   gem: 0
-  maxShip: 20
+  maxShip: 0
   currentShip: 0
 --- !u!114 &3817173375965825454
 MonoBehaviour:

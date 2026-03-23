@@ -14,8 +14,6 @@ public class HUDUI : MonoBehaviour
         playerStatus.OnGoldChanged += UpdateGoldText;
         playerStatus.OnGemChanged += UpdateGemText;
         playerStatus.OnShipChanged += UpdateShipText;
-
-        playerStatus.ReBuild();
     }
 
     private void OnDestroy()
