@@ -8295,7 +8295,7 @@ MonoBehaviour:
   - {fileID: 6388644962932471224, guid: 4e53a814d9d3baa4b98ad7c2da35e1b4, type: 3}
   - {fileID: 7417651128765128131, guid: 8e9bbbae29ee7fd45935b987246b5fcc, type: 3}
   - {fileID: 5645546287954289400, guid: 13977161a1e0a0842879407f9680df68, type: 3}
-  needMergeCount: 1
+  needMergeCount: 2
   player: {fileID: 8832783645269591924}
 --- !u!4 &1132060363
 Transform:
